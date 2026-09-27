@@ -8,7 +8,7 @@ import NaoEncontrada from "./pages/NaoEncontrada";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Avaliacao04-web">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
