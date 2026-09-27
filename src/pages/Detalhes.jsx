@@ -22,6 +22,24 @@ function Detalhes() {
     buscarDetalhes();
   }, [id]);
 
+  function salvarFilme() {
+    const minhaLista = localStorage.getItem("@catalogoFilmes");
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+
+    const hasFilme = filmesSalvos.some(
+      (filmeSalvo) => filmeSalvo.id === filme.id,
+    );
+
+    if (hasFilme) {
+      alert("Este filme já está na sua lista!");
+      return;
+    }
+
+    filmesSalvos.push(filme);
+    localStorage.setItem("@catalogoFilmes", JSON.stringify(filmesSalvos));
+    alert("Filme salvo com sucesso!");
+  }
+
   if (!filme) {
     return <div>Carregando informações do filme....</div>;
   }
@@ -34,6 +52,7 @@ function Detalhes() {
         <h1>{filme.title}</h1>
         <p>{filme.overview}</p>
         <p>Avaliação: {filme.vote_average} / 10</p>
+        <button onClick={salvarFilme}>Salvar nos Favoritos</button>
       </div>
     </div>
   );
